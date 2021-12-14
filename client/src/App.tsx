@@ -1,10 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 //import logo from './logo.svg';
-/*import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PostList from './PostList/PostList';
 import Post from './Post/Post';
-*/
 import './App.css';
 
 /*class App extends React.Component {
@@ -35,14 +34,14 @@ class App extends React.Component {
     })
   }
 
-  /*viewPost = (post) => {
+  viewPost = (post) => {
     console.log(`view ${post.title}`);
     this.setState({
       post: post
     });
   }
 
-  deletePost = post => {
+  /*deletePost = post => {
     axios
       .delete(`http://localhost:5000/api/posts/${post.id}`)
       .then(response => {
@@ -53,11 +52,13 @@ class App extends React.Component {
       })
       .catch(error => {
         console.error(`Error deleting post: ${error}`);
-      });*/
+      });
+      */
 
   render() {
-    //const { posts, post } = this.state;
+    const { posts, post } = this.state;
 
+    /*
     return(
       <div className="App">
         <header className="App-header">
@@ -65,6 +66,26 @@ class App extends React.Component {
         </header>
           {this.state.values.map((value: any) => <div key={value}>{value}</div>)}
         </div>
+    );*/
+
+    return (
+      <Router>
+        <div className="App">
+          <header className ="App-header">
+            BlogBox
+          </header>
+          <main className="App-content">
+            <Switch>
+              <Route exact path="/">
+                <PostList posts={posts} clickPost={this.viewPost} />
+              </Route>
+              <Route path="/posts/:postId">
+                <Post post={post} />
+              </Route>
+            </Switch>
+          </main>
+        </div>
+      </Router>
     );
   }
 }
