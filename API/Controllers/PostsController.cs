@@ -1,12 +1,12 @@
-using System;
+//using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Posts;
-using Domain;
+//using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Persistence;
-using System.Linq;
+//using Persistence;
+//using System.Linq;
 
 namespace API.Controllers
 {
@@ -16,20 +16,23 @@ namespace API.Controllers
     public class PostsController : ControllerBase
     {
         private readonly IMediator mediator;
-        private readonly DataContext context;
 
-        public PostsController(IMediator mediator, DataContext context)
+        public PostsController(IMediator mediator) => this.mediator = mediator;
+
+        
+        //private readonly DataContext context;
+
+        /*public PostsController(IMediator mediator, DataContext context)
         {
             this.mediator = mediator;
             this.context = context;
-        }
-
+        }*/
 
         public async Task<ActionResult<List<Post>>> List()
         {
             return await this.mediator.Send(new List.Query());
         }
-
+/*
         [HttpGet]
         public ActionResult<List<Post>> Get()
         {
@@ -110,6 +113,6 @@ namespace API.Controllers
 
             throw new Exception("Error deleting post");
         }
-
+*/
     }
 }
