@@ -1,25 +1,33 @@
 import React from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+//import logo from './logo.svg';
+/*import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PostList from './PostList/PostList';
 import Post from './Post/Post';
+*/
 import './App.css';
 
-
-
-
+/*class App extends React.Component {
+  render () {
+    return (
+      <div className="App">
+        <header className="App-header">
+          BlogBox
+        </header>
+      </div>
+      );
+  }    
+}*/
 class App extends React.Component {
-
   state = {
-    posts: [],
-    post: null
+    values: []
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/api/posts')
+    axios.get('http://localhost:5000/api/values')
     .then((response) => {
       this.setState({
-        posts: response.data
+        values: response.data
       })
     })
     .catch((error) => {
@@ -27,7 +35,7 @@ class App extends React.Component {
     })
   }
 
-  viewPost = (post) => {
+  /*viewPost = (post) => {
     console.log(`view ${post.title}`);
     this.setState({
       post: post
@@ -45,34 +53,18 @@ class App extends React.Component {
       })
       .catch(error => {
         console.error(`Error deleting post: ${error}`);
-      });
-  };
+      });*/
 
   render() {
-    const { posts, post } = this.state;
+    //const { posts, post } = this.state;
 
     return(
-      <Router>
-        <div className="App">
-          <header className="App=header">
-            BlogBox
-          </header>
-          <main className="App-content">
-            <Switch>
-              <Route exact path="/">
-                <PostList
-                 posts={posts} 
-                 clickPost={this.viewPost}
-                 deletePost={this.deletePost}
-                  />
-              </Route>
-              <Route path="/posts/:postId">
-                <Post post={post} />
-              </Route>
-            </Switch>
-          </main>
+      <div className="App">
+        <header className="App-header">
+          BlogBox
+        </header>
+          {this.state.values.map((value: any) => <div key={value}>{value}</div>)}
         </div>
-      </Router>
     );
   }
 }
